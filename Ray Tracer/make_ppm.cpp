@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "make_ppm.h"
 
-void write_ppm(color** colors, int width, int height, std::string fileLoc)
+void write_ppm(vec3** colors, int width, int height, std::string fileLoc)
 {
 	std::ofstream outfile(fileLoc.c_str(), std::ofstream::trunc);
 
@@ -14,8 +14,8 @@ void write_ppm(color** colors, int width, int height, std::string fileLoc)
 
 	//Write RGB color triplets
 	for (int i = 0; i < width * height; i++) {
-		color* c = colors[i];
-		outfile << c->r << " " << c->g << " " << c->b << "\n";
+		vec3* c = colors[i];
+		outfile << c->r() << " " << c->g() << " " << c->b() << "\n";
 	}
 
 	outfile.close();
@@ -25,16 +25,12 @@ void test_ppm()
 {
 	const int width = 100;
 	const int height = 100;
-	color* colors[width * height];
+	vec3** colors = new vec3*[width * height];
 
 	for (int i = 0; i < width * height; i++) {
-		color* c = new color;
-		c->r = 255;
-		c->g = 0;
-		c->b = 0;
-
-		colors[i] = c;
+		colors[i] = new vec3(255, 0, 0);
 	}
 
 	write_ppm(colors, width, height, "test.ppm");
+	delete[] colors;
 }
