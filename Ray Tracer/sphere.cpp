@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-bool Sphere::intersects(ray & r) {
+vec3* Sphere::intersects(ray & r) {
 	//vector from ray origin to sphere center
 	vec3 oc = r.origin() - center;
 
@@ -12,7 +12,6 @@ bool Sphere::intersects(ray & r) {
 	//Solve for number of roots (t)
 	//t > 0 = intersection
 
-	//float a = dot(r.direction(), r.direction());
 	float rayDirLength = r.direction().length();
 	float ocLength = oc.length();
 
@@ -21,5 +20,17 @@ bool Sphere::intersects(ray & r) {
 	float c = ocLength * ocLength - radius * radius;
 	float discriminant = b * b - 4 * a * c;
 
-	return discriminant > 0;
+	if (discriminant > 0) { //Intersection
+		float nt = (-b - sqrt(discriminant)) / (2.0 * a);
+		vec3* normal = new vec3;
+		*normal = unit_vector(r.point_at_param(nt) - r.origin());
+		
+		//Normalize [-1, 1] -> [0, 1]
+		*normal += vec3(1, 1, 1);
+		*normal *= 0.5;
+
+		return normal;
+	}
+
+	return nullptr;
 }

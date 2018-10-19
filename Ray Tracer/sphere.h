@@ -18,8 +18,10 @@ public:
 	}
 
 	/*
-	Checks whether the passed ray intersects this Sphere
+	Checks whether the passed ray intersects this Sphere. 
+	If it intersects, the normal for the hit is returned. 
+	Otherwise, nullptr is returned.
 	*/
-	bool intersects(ray& r);
+	vec3* intersects(ray& r);
 };
 

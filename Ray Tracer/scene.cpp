@@ -21,15 +21,25 @@ void Scene::render(int px, int py, std::string file)
 			//Create ray through pixel
 			ray r = ray(origin, lower_left_corner + u * horizontal + v * vertical);
 
-			vec3* color = new vec3(255, 255, 255);
+			vec3* color = nullptr;
+			bool rayIntersects = false;
 
 			//Determine if ray intersected any spheres
 			for (int s = 0; s < spheres->size(); s++) {
-				if (spheres->at(s).intersects(r)) {
-					color = new vec3(255, 0, 0);
+				vec3* intersection = spheres->at(s).intersects(r);
+
+				if (intersection != nullptr) {
+					*intersection *= 255; 
+					color = intersection;
+					rayIntersects = true;
 
 					break;
 				}
+			}
+
+			//If no intersection, set color to background color
+			if (!rayIntersects) {
+				color = getBackgroundColorAt(r);
 			}
 
 			colors[cIdx] = color;
@@ -80,4 +90,16 @@ void Scene::debug_camera()
 	write_ppm(colors, nx, ny, "test.ppm");
 	
 	delete[] colors;
+}
+
+vec3* Scene::getBackgroundColorAt(ray& r) {
+	//Calculate color at the pixel (pitch of Y axis)
+	vec3 unit_dir = unit_vector(r.direction()); //Convert to unit vector [-1, 1]
+	float t = 0.5 * (unit_dir.y() + 1); //Scale to [0, 1]
+
+	//Determine color through linear interpolation
+	vec3* col = new vec3;
+	*col = (1 - t) * bgEndCol + t * bgStartCol;
+	
+	return col;
 }

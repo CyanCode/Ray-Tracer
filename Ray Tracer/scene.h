@@ -22,30 +22,17 @@ public:
 	llc = lower left corner
 	horiz = horizontal length
 	vert = vertical length
-	*/
-	Scene(vec3 llc, int horiz, int vert) { 
-		lower_left_corner = llc; 
-		horizontal = vec3(horiz, 0, 0);
-		vertical = vec3(0, vert, 0);
-		origin = vec3(0, 0, 0);
-
-		spheres = new std::vector<Sphere>;
-	}
-
-	/*
-	Create a scene that initializes a camera with the passed dimensions
-	llc = lower left corner
-	horiz = horizontal length
-	vert = vertical length
 	origin = origin of camera
 	*/
-	Scene(vec3 llc, int horiz, int vert, vec3 origin) {
+	Scene(vec3 llc, int horiz, int vert, vec3 origin = vec3(0, 0, 0)) {
 		lower_left_corner = llc;
 		horizontal = vec3(horiz, 0, 0);
 		vertical = vec3(0, vert, 0);
 		this->origin = origin;
 
 		spheres = new std::vector<Sphere>;
+
+		setBackgroundGradient(vec3(1, 1, 1), vec3(1, 1, 1));
 	}
 
 	/*
@@ -65,5 +52,23 @@ public:
 	white and blue. This file is saved as "test.ppm"
 	*/
 	void debug_camera();
+
+	/*
+	Sets the background color gradient of the scene. By default 
+	the scene is white.
+	*/
+	void setBackgroundGradient(vec3 startCol, vec3 endCol) {
+		this->bgStartCol = startCol;
+		this->bgEndCol = endCol;
+	}
+private:
+	vec3 bgStartCol;
+	vec3 bgEndCol;
+
+	/*
+	Gets the background color at the passed ray. Ray should fire 
+	through pixel on screen into 3D space.
+	*/
+	vec3* getBackgroundColorAt(ray& r);
 };
 

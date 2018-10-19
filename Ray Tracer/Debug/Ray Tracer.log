@@ -1,0 +1,7 @@
+﻿  scene.cpp
+c:\users\walker c\documents\visual studio 2017\projects\ray tracer\ray tracer\vec3.h(30): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\walker c\documents\visual studio 2017\projects\ray tracer\ray tracer\vec3.h(31): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\walker c\documents\visual studio 2017\projects\ray tracer\ray tracer\vec3.h(32): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\walker c\documents\visual studio 2017\projects\ray tracer\ray tracer\scene.h(29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\walker c\documents\visual studio 2017\projects\ray tracer\ray tracer\scene.h(30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Ray Tracer.vcxproj -> C:\Users\Walker C\Documents\Visual Studio 2017\Projects\Ray Tracer\Debug\Ray Tracer.exe
