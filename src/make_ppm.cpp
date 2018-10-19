@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "make_ppm.h"
 
 void write_ppm(vec3** colors, int width, int height, std::string fileLoc)

@@ -3,5 +3,8 @@ project(Ray_Tracer)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+file(GLOB SOURCE_FILES
+        "src/*.h"
+        "src/*.cpp")
+
 add_executable(Ray_Tracer ${SOURCE_FILES})

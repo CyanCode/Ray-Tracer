@@ -15,7 +15,7 @@ public:
 	vec3 vertical;
 	vec3 origin;
 
-	std::vector<Sphere>* spheres;
+	std::vector<SceneObject*>* sceneObjects;
 
 	/*
 	Create a scene that initializes a camera with the passed dimensions
@@ -30,15 +30,12 @@ public:
 		vertical = vec3(0, vert, 0);
 		this->origin = origin;
 
-		spheres = new std::vector<Sphere>;
+		sceneObjects = new std::vector<SceneObject*>;
 
 		setBackgroundGradient(vec3(1, 1, 1), vec3(1, 1, 1));
 	}
 
-	/*
-	Adds the passed sphere to the scene
-	*/
-	void addSphere(Sphere& sphere);
+	void addSceneObject(SceneObject& so);
 
 	/*
 	Renders an image with the passed x and y pixel dimensions. 

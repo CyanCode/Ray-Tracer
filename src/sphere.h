@@ -2,9 +2,9 @@
 
 #include "vec3.h"
 #include "ray.h"
+#include "scene_object.h"
 
-class Sphere
-{
+class Sphere : public SceneObject {
 public:
 	vec3 center;
 	float radius;
@@ -22,6 +22,6 @@ public:
 	If it intersects, the normal for the hit is returned. 
 	Otherwise, nullptr is returned.
 	*/
-	vec3* intersects(ray& r);
+	vec3* intersects(ray& r) override;
 };
 

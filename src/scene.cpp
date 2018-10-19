@@ -1,8 +1,7 @@
 #include "scene.h"
 
-void Scene::addSphere(Sphere & sphere)
-{
-	spheres->push_back(sphere);
+void Scene::addSceneObject(SceneObject& so) {
+	sceneObjects->push_back(&so);
 }
 
 void Scene::render(int px, int py, std::string file)
@@ -24,9 +23,9 @@ void Scene::render(int px, int py, std::string file)
 			vec3* color = nullptr;
 			bool rayIntersects = false;
 
-			//Determine if ray intersected any spheres
-			for (int s = 0; s < spheres->size(); s++) {
-				vec3* intersection = spheres->at(s).intersects(r);
+			//Determine if ray intersected any scene objects
+			for (int s = 0; s < sceneObjects->size(); s++) {
+				vec3* intersection = sceneObjects->at(s)->intersects(r);
 
 				if (intersection != nullptr) {
 					*intersection *= 255; 
@@ -103,3 +102,4 @@ vec3* Scene::getBackgroundColorAt(ray& r) {
 	
 	return col;
 }
+
