@@ -35,6 +35,9 @@ public:
 		setBackgroundGradient(vec3(1, 1, 1), vec3(1, 1, 1));
 	}
 
+	/*
+	 * Adds an arbitrary object to the scene
+	 */
 	void addSceneObject(SceneObject& so);
 
 	/*
